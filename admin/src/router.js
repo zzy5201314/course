@@ -16,6 +16,10 @@ export default new Router({
     }, {
         path: '/admin',
         // 懒加载
-        component: () => import('./views/admin.vue')
+        component: () => import('./views/admin.vue'),
+        children: [{
+            path: 'welcome',
+            component: () => import('./views/admin/welcome.vue')
+        }]
     }]
 })
