@@ -20,6 +20,9 @@ export default new Router({
         children: [{
             path: 'welcome',
             component: () => import('./views/admin/welcome.vue')
+        },{
+            path: 'chapter',
+            component: () => import('./views/admin/chapter.vue')
         }]
     }]
 })
