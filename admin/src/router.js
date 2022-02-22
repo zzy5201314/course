@@ -14,7 +14,7 @@ export default new Router({
         // 懒加载
         component: () => import('./views/login.vue')
     }, {
-        path: '/admin',
+        path: '/',
         name: 'admin',
         // 懒加载
         component: () => import('./views/admin.vue'),
