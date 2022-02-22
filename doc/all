@@ -8,3 +8,10 @@ CREATE TABLE `course`.`Untitled`  (
   `name` varchar(50) NULL COMMENT '名称',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '大章';
+
+INSERT INTO `CHAPTER` ( ID, COURSE_ID, `NAME` )
+VALUES
+	( '00000000', '00000000', '测试大章一' );
+INSERT INTO `CHAPTER` ( ID, COURSE_ID, `NAME` )
+VALUES
+	( '00000001', '00000000', '测试大章二' );
