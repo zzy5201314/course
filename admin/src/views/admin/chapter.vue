@@ -977,9 +977,17 @@
   </table>
 </template>
 
+
 <script>
 export default {
-  name: "chapter"
+  name: 'chapter',
+  mounted() {
+    this.$parent.activeSideBar("business-chapter-sidebar");
+  },
+  methods:  {
+
+  }
+
 }
 </script>
 

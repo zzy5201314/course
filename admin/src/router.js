@@ -15,13 +15,16 @@ export default new Router({
         component: () => import('./views/login.vue')
     }, {
         path: '/admin',
+        name: 'admin',
         // 懒加载
         component: () => import('./views/admin.vue'),
         children: [{
             path: 'welcome',
+            name: 'welcome',
             component: () => import('./views/admin/welcome.vue')
         },{
-            path: 'chapter',
+            path: 'business/chapter',
+            name: 'business/chapter',
             component: () => import('./views/admin/chapter.vue')
         }]
     }]
