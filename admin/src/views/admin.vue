@@ -184,7 +184,8 @@
                   <ul class="dropdown-menu dropdown-navbar">
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                        <img src="../../public/ace/assets/images/avatars/avatar.png" class="msg-photo"
+                             alt="Alex's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Alex:</span>
@@ -201,7 +202,8 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                        <img src="../../public/ace/assets/images/avatars/avatar3.png" class="msg-photo"
+                             alt="Susan's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Susan:</span>
@@ -218,7 +220,8 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                        <img src="../../public/ace/assets/images/avatars/avatar4.png" class="msg-photo"
+                             alt="Bob's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Bob:</span>
@@ -235,7 +238,8 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+                        <img src="../../public/ace/assets/images/avatars/avatar2.png" class="msg-photo"
+                             alt="Kate's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Kate:</span>
@@ -252,7 +256,8 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+                        <img src="../../public/ace/assets/images/avatars/avatar5.png" class="msg-photo"
+                             alt="Fred's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Fred:</span>
@@ -280,7 +285,7 @@
 
             <li class="light-blue dropdown-modal">
               <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                <img class="nav-user-photo" src="../../public/ace/assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                <img class="nav-user-photo" src="../../public/ace/assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                 <span class="user-info">
 									<small>Welcome,</small>
 									Jason
@@ -423,7 +428,8 @@
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-          <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+          <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
+             data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
       </div>
 
@@ -478,11 +484,24 @@
 export default {
   name: 'admin',
   mounted() {
+    let _this = this;
     $('body').removeClass('login-layout light-login');
     $('body').attr('class', 'no-skin');
+    _this.activeSideBar(_this.$route.name.replace("/", "-") + "-sidebar");
   },
-  methods:  {
-    login () {
+  watch: {
+    $route: {
+      handler: function (val, oldVal) {
+        console.log(val,"---->页面跳转---->", oldVal);
+        let _this = this;
+        this.$nextTick(function () {  // 页面加载完成后执行
+          _this.activeSideBar(_this.$route.name.replace("/", "-") + "-sidebar");
+        })
+      }
+    }
+  },
+  methods: {
+    login() {
       this.$router.push("/admin")
     },
 
@@ -490,7 +509,7 @@ export default {
      * 菜单激活样式，id时当前点击菜单的id
      * @param id
      */
-    activeSideBar: function (id){
+    activeSideBar: function (id) {
       // 兄弟菜单去掉active样式，自身增加active样式
       $('#' + id).siblings().removeClass('active');
       $('#' + id).siblings().find("li").removeClass('active');

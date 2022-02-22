@@ -8,7 +8,7 @@
 export default {
   name: 'welcome',
   mounted() {
-    this.$parent.activeSideBar("welcome-sidebar");
+    // this.$parent.activeSideBar("welcome-sidebar");
   },
   methods:  {
 

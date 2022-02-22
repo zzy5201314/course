@@ -982,7 +982,7 @@
 export default {
   name: 'chapter',
   mounted() {
-    this.$parent.activeSideBar("business-chapter-sidebar");
+    // this.$parent.activeSideBar("business-chapter-sidebar");
   },
   methods:  {
 
