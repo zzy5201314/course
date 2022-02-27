@@ -23,7 +23,7 @@ public class ChapterController {
     @Resource
     private ChapterService chapterService;
 
-    @RequestMapping(value = "/list")
+    @PostMapping(value = "/list")
     public CommonRespDto list(@RequestBody PageDto pageDto){
         LOG.info("pageDto:{}",pageDto);
         CommonRespDto commonRespDto = new CommonRespDto();
@@ -32,12 +32,20 @@ public class ChapterController {
         return commonRespDto;
     }
 
-    @RequestMapping(value = "/save")
+    @PostMapping(value = "/save")
     public CommonRespDto save(@RequestBody ChapterDto chapterDto){
         LOG.info("chapterDto:{}",chapterDto);
         CommonRespDto commonRespDto = new CommonRespDto();
         chapterService.save(chapterDto);
         commonRespDto.setContent(chapterDto);
+        return commonRespDto;
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public CommonRespDto delete(@PathVariable Long id){
+        LOG.info("id:{}",id);
+        CommonRespDto commonRespDto = new CommonRespDto();
+        chapterService.delete(id);
         return commonRespDto;
     }
 
