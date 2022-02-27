@@ -131,7 +131,7 @@ export default {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: '确认删除!'
       }).then((result) => {
         if (result.isConfirmed) {
           _this.$ajax.delete("http://127.0.0.1:9000/business/admin/chapter/delete/" + id).then((response) => {
@@ -139,11 +139,7 @@ export default {
             let resp = response.data;
             if (resp.success) {
               _this.list(1);
-              Swal.fire(
-                  '删除成功!',
-                  '删除成功',
-                  'success'
-              )
+              toast.success("删除成功！");
             }
           })
         }
@@ -171,6 +167,7 @@ export default {
         if (resp.success) {
           $("#form-modal").modal("hide");
           _this.list(1);
+          toast.success("保存成功！");
         }
       })
     }
