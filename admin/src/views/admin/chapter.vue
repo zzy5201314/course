@@ -118,19 +118,37 @@ export default {
 
     edit(chapter) {
       let _this = this;
-      _this.chapter = $.extend({},chapter);
+      _this.chapter = $.extend({}, chapter);
       $("#form-modal").modal("show");
     },
 
     del(id) {
       let _this = this;
-      _this.$ajax.delete("http://127.0.0.1:9000/business/admin/chapter/delete/" + id).then((response) => {
-        console.log("删除大章列表结果:", response);
-        let resp = response.data;
-        if (resp.success) {
-          _this.list(1);
+      Swal.fire({
+        title: '确认删除?',
+        text: "删除后不可恢复，请确认是否删除!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          _this.$ajax.delete("http://127.0.0.1:9000/business/admin/chapter/delete/" + id).then((response) => {
+            console.log("删除大章列表结果:", response);
+            let resp = response.data;
+            if (resp.success) {
+              _this.list(1);
+              Swal.fire(
+                  '删除成功!',
+                  '删除成功',
+                  'success'
+              )
+            }
+          })
         }
       })
+
     },
 
     list(page) {
