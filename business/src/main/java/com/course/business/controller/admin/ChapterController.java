@@ -1,15 +1,14 @@
 package com.course.business.controller.admin;
 
-import com.course.server.domain.Chapter;
 import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
+import com.course.server.respDto.CommonRespDto;
 import com.course.server.service.ChapterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author zzy
@@ -25,17 +24,21 @@ public class ChapterController {
     private ChapterService chapterService;
 
     @RequestMapping(value = "/list")
-    public PageDto list(@RequestBody PageDto pageDto){
+    public CommonRespDto list(@RequestBody PageDto pageDto){
         LOG.info("pageDto:{}",pageDto);
+        CommonRespDto commonRespDto = new CommonRespDto();
         chapterService.list(pageDto);
-        return pageDto;
+        commonRespDto.setContent(pageDto);
+        return commonRespDto;
     }
 
     @RequestMapping(value = "/save")
-    public ChapterDto save(@RequestBody ChapterDto chapterDto){
+    public CommonRespDto save(@RequestBody ChapterDto chapterDto){
         LOG.info("chapterDto:{}",chapterDto);
+        CommonRespDto commonRespDto = new CommonRespDto();
         chapterService.save(chapterDto);
-        return chapterDto;
+        commonRespDto.setContent(chapterDto);
+        return commonRespDto;
     }
 
 }

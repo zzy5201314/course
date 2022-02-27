@@ -6,7 +6,7 @@
         <i class="ace-icon fa fa-edit"></i>
         新增
       </button>
-<!--      加入一个空格-->
+      <!--      加入一个空格-->
       &nbsp;
 
       <button @click="list(1)" class="btn btn-white btn-default btn-round">
@@ -91,7 +91,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" tabindex="-1" role="dialog">
+    <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -152,7 +152,7 @@ export default {
   methods: {
     add() {
       let _this = this;
-      $(".modal").modal("show");
+      $("#form-modal").modal("show");
     },
 
     list(page) {
@@ -160,20 +160,23 @@ export default {
       _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/list", {
         page: page,
         size: _this.$refs.pagination.size,
+      }).then((response) => {
+        let resp = response.data;
+        console.log("查询大章列表结果:", response);
+        _this.chapters = resp.content.list;
+        _this.$refs.pagination.render(page, resp.content.total);
       })
-          .then((response) => {
-            console.log("查询大章列表结果:", response);
-            _this.chapters = response.data.list;
-            _this.$refs.pagination.render(page, response.data.total);
-          })
     },
 
     save(page) {
       let _this = this;
-      _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/save", _this.chapter)
-          .then((response) => {
-            console.log("查询大章列表结果:", response);
-          })
+      _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/save", _this.chapter).then((response) => {
+        let resp = response.data;
+        if (resp.success) {
+          $("#form-modal").modal("hide");
+          _this.list(1);
+        }
+      })
     }
   }
 
