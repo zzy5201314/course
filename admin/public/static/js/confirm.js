@@ -13,6 +13,5 @@ const Confirm = {
                 callback()
             }
         })
-
     }
-}
+};
