@@ -124,28 +124,41 @@ export default {
 
     del(id) {
       let _this = this;
-      Swal.fire({
-        title: '确认删除?',
-        text: "删除后不可恢复，请确认是否删除!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '确认删除!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Loading.show();
-          _this.$ajax.delete("http://127.0.0.1:9000/business/admin/chapter/delete/" + id).then((response) => {
-            console.log("删除大章列表结果:", response);
-            let resp = response.data;
-            if (resp.success) {
-              Loading.hide();
-              _this.list(1);
-              toast.success("删除成功！");
-            }
-          })
-        }
+      Confirm.show("删除后不可恢复，请确认是否删除!", function () {
+            Loading.show();
+            _this.$ajax.delete("http://127.0.0.1:9000/business/admin/chapter/delete/" + id).then((response) => {
+              console.log("删除大章列表结果:", response);
+              let resp = response.data;
+              if (resp.success) {
+                Loading.hide();
+                _this.list(1);
+                Toast.success("删除成功！");
+              }
+            })
       })
+
+      // Swal.fire({
+      //   title: '确认删除?',
+      //   text: "删除后不可恢复，请确认是否删除!",
+      //   icon: 'warning',
+      //   showCancelButton: true,
+      //   confirmButtonColor: '#3085d6',
+      //   cancelButtonColor: '#d33',
+      //   confirmButtonText: '确认删除!'
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     Loading.show();
+      //     _this.$ajax.delete("http://127.0.0.1:9000/business/admin/chapter/delete/" + id).then((response) => {
+      //       console.log("删除大章列表结果:", response);
+      //       let resp = response.data;
+      //       if (resp.success) {
+      //         Loading.hide();
+      //         _this.list(1);
+      //         Toast.success("删除成功！");
+      //       }
+      //     })
+      //   }
+      // })
 
     },
 
@@ -173,7 +186,7 @@ export default {
           Loading.hide();
           $("#form-modal").modal("hide");
           _this.list(1);
-          toast.success("保存成功！");
+          Toast.success("保存成功！");
         }
       })
     }
