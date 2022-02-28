@@ -1,6 +1,7 @@
 package com.course.server.dto;
 
 public class ChapterDto {
+
     private Long id;
 
     private Long courseId;

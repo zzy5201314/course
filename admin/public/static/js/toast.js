@@ -3,7 +3,7 @@ const Toast = {
         Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'message',
+            title: message,
             showConfirmButton: false,
             timer: 3000
         })
@@ -13,7 +13,7 @@ const Toast = {
         Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: 'message',
+            title: message,
             showConfirmButton: false,
             timer: 3000
         })
@@ -22,8 +22,8 @@ const Toast = {
     warning: function (message) {
         Swal.fire({
             position: 'top-end',
-            icon: 'waring',
-            title: 'message',
+            icon: 'warning',
+            title: message,
             showConfirmButton: false,
             timer: 3000
         })
