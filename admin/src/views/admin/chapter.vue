@@ -134,10 +134,12 @@ export default {
         confirmButtonText: '确认删除!'
       }).then((result) => {
         if (result.isConfirmed) {
+          Loading.show();
           _this.$ajax.delete("http://127.0.0.1:9000/business/admin/chapter/delete/" + id).then((response) => {
             console.log("删除大章列表结果:", response);
             let resp = response.data;
             if (resp.success) {
+              Loading.hide();
               _this.list(1);
               toast.success("删除成功！");
             }
@@ -149,10 +151,12 @@ export default {
 
     list(page) {
       let _this = this;
+      Loading.show();
       _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/list", {
         page: page,
         size: _this.$refs.pagination.size,
       }).then((response) => {
+        Loading.hide();
         let resp = response.data;
         console.log("查询大章列表结果:", response);
         _this.chapters = resp.content.list;
@@ -162,9 +166,11 @@ export default {
 
     save(page) {
       let _this = this;
+      Loading.show();
       _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/save", _this.chapter).then((response) => {
         let resp = response.data;
         if (resp.success) {
+          Loading.hide();
           $("#form-modal").modal("hide");
           _this.list(1);
           toast.success("保存成功！");
